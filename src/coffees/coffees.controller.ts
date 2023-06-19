@@ -6,13 +6,15 @@ import {
   Body,
   Patch,
   Delete,
+  Query,
 } from '@nestjs/common';
 
 @Controller('coffees')
 export class CoffeesController {
-  @Get('flavors')
-  findAll() {
-    return 'this actions return all coffees !!';
+  @Get()
+  findAll(@Query() paginationQuery) {
+    const { limit, offset } = paginationQuery;
+    return `this actions return all coffees Limit : ${limit} , OffSet : ${offset} !!`;
   }
   @Get(':id')
   findOne(@Param('id') id: string) {
